@@ -29,11 +29,11 @@ W obecnej fazie wszystko znajduje się w jednym repozytorium. W przyszłości pr
 
 ## Stan obecny (pre-alfa)
 
-[x] Prototyp silnika syntezy wzorowanego na Viscount Physis (offline)
-[x] Interaktywny generator komponentów harmonicznych (Jupyter)
-[-] Refaktoryzacja kodu
-[-] Rozbudowa silnika do działania w czasie rzeczywistym
-[-] Integracja z systemem ML i FDTD
+- [x] Prototyp silnika syntezy wzorowanego na Viscount Physis (offline)
+- [x] Interaktywny generator komponentów harmonicznych (Jupyter)
+- [-] Refaktoryzacja kodu
+- [-] Rozbudowa silnika do działania w czasie rzeczywistym
+- [-] Integracja z systemem ML i FDTD
 
 ## Dokumentacja
 
