@@ -41,7 +41,7 @@ W fazie tworzenia. Notatki projektowe i eksperymenty znajdują się w folderze `
 
 Notatniki:
 
-- [oscilator.ipynb](./notebooks/oscilator.ipynb) - zgodnie z dokumentacją Viscout Physis odpowiada to blokowi 9 i 10 - patrz rys. 2 [Viscout Physis](./docs/attachments/US7442869.pdf)
+- [oscilator.ipynb](./notebooks/oscylator-cyfrowy.ipynb) - zgodnie z dokumentacją Viscout Physis odpowiada to blokowi 9 i 10 - patrz rys. 2 [Viscout Physis](./docs/attachments/US7442869.pdf)
 
 ## Zależności
 
