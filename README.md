@@ -29,11 +29,11 @@ W obecnej fazie wszystko znajduje się w jednym repozytorium. W przyszłości pr
 
 ## Stan obecny (pre-alfa)
 
-[x] Prototyp silnika syntezy wzorowanego na Viscount Physis (offline)
-[x] Interaktywny generator komponentów harmonicznych (Jupyter)
-[-] Refaktoryzacja kodu
-[-] Rozbudowa silnika do działania w czasie rzeczywistym
-[-] Integracja z systemem ML i FDTD
+- [x] Prototyp silnika syntezy wzorowanego na Viscount Physis (offline)
+- [x] Interaktywny generator komponentów harmonicznych (Jupyter)
+- [-] Refaktoryzacja kodu
+- [-] Rozbudowa silnika do działania w czasie rzeczywistym
+- [-] Integracja z systemem ML i FDTD
 
 ## Dokumentacja
 
@@ -41,7 +41,7 @@ W fazie tworzenia. Notatki projektowe i eksperymenty znajdują się w folderze `
 
 Notatniki:
 
-- [oscilator.ipynb](./notebooks/oscilator.ipynb) - zgodnie z dokumentacją Viscout Physis odpowiada to blokowi 9 i 10 - patrz rys. 2 [Viscout Physis](./docs/attachments/US7442869.pdf)
+- [oscilator.ipynb](./notebooks/oscylator-cyfrowy.ipynb) - zgodnie z dokumentacją Viscout Physis odpowiada to blokowi 9 i 10 - patrz rys. 2 [Viscout Physis](./docs/attachments/US7442869.pdf)
 
 ## Zależności
 
