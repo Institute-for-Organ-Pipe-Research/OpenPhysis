@@ -1,0 +1,26 @@
+PARAMETER_RANGES = {
+    'clip1': (0.1, 1.0, 0.01),
+    'clip2': (0.1, 1.0, 0.01),
+    'gaind': (0.1, 1.0, 0.01),
+    'gainf': (0.1, 1.0, 0.01),
+    'cdel': (0.0, 10.0, 0.01),
+    'cbyp': (0.0, 10.0, 0.01),
+    'x0': (0.0, 1.0, 0.5),
+    'y0': (0.0, 1.0, 0.5),
+    'mod_ampl': (0.0, 1.0, 0.1),
+    'ngain': (0.0, 1.0, 0.01),
+    'nbfbk': (0.0, 1.0, 0.01),
+    'ncgain': (0.0, 1.0, 0.01),
+    'rate_gain': (0.0, 1.0, 0.01),
+    'noise_attack': (0.01, 0.5, 0.01),
+    'fbk': (0.0, 0.9, 0.01),
+    'tfbk': (0.0, 1.0, 0.01),
+    'resonator_attack': (0.001, 0.5, 0.01),
+    'attack_time': (0.01, 0.5, 0.01),
+    'decay_time': (0.01, 1.0, 0.01),
+    'sustain_level': (0.3, 1.0, 0.01),
+    'release_time': (0.01, 5.0, 0.01),
+    'initial_level': (0.0, 1.0, 0.01),
+}
+
+# from parameter_ranges import PARAMETER_RANGES

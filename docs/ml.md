@@ -59,21 +59,8 @@
 - Spectral centroid związany z działaniem filtrów (47, 49) z Fig. 15
 - Harmonic ratio odpowiada za balans między komponentem harmonicznym a szumowym (bloki 9 vs 11)
 
-## Optymalizacja dla syntezy organów
+## Źródła
 
-**Dobre praktyki**:
-
-```python
-# Przykład ważenia cech dla organów
-feature_weights = np.array([
-    1.0,  # attack 
-    0.7,  # decay  
-    1.2,  # sustain (najważniejsze)
-    0.5,  # release
-    *np.ones(13),  # MFCC
-    *np.linspace(1.5, 0.5, 13),  # Deltas (ważniejsze niższe częstotliwości)
-    0.8,  # centroid
-    1.1,  # bandwidth  
-    1.5   # harmonic ratio (kluczowe)
-])
-```
+1. https://pages.mini.pw.edu.pl/~rafalkoj/www/
+2. https://pages.mini.pw.edu.pl/~rafalkoj/www/?Dydaktyka:2024%2F2025:-_Analiza_i_przetwarzanie_d%C5%BAwi%C4%99ku - uzyskać pliki pdf
+3. https://www.reddit.com/r/synthesizers/comments/yurp6k/mel_frequency_cepstral_coefficients_mfcc_explained/?tl=pl
