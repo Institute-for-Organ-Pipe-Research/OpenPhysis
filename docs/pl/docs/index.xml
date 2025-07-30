@@ -1,13 +1,13 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenPhysis powerade by FONUS – Dokumentacja</title>
-    <link>http://localhost:1313/pl/docs/</link>
+    <link>https://openphysis.amelia-krasucka.pl/pl/docs/</link>
     <description>Recent content in Dokumentacja on OpenPhysis powerade by FONUS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl</language>
     <lastBuildDate>Wed, 30 Jul 2025 17:00:00 +0200</lastBuildDate>
     
-	  <atom:link href="http://localhost:1313/pl/docs/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://openphysis.amelia-krasucka.pl/pl/docs/index.xml" rel="self" type="application/rss+xml" />
     
     
       
@@ -17,10 +17,10 @@
     
     <item>
       <title>Architektura</title>
-      <link>http://localhost:1313/pl/docs/architektura/</link>
+      <link>https://openphysis.amelia-krasucka.pl/pl/docs/architektura/</link>
       <pubDate>Wed, 30 Jul 2025 17:00:00 +0200</pubDate>
       
-      <guid>http://localhost:1313/pl/docs/architektura/</guid>
+      <guid>https://openphysis.amelia-krasucka.pl/pl/docs/architektura/</guid>
       <description>
         
         

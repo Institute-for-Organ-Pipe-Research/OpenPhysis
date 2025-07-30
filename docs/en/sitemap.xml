@@ -2,57 +2,57 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
-    <loc>http://localhost:1313/docs/architecture/</loc>
+    <loc>https://openphysis.amelia-krasucka.pl/docs/architecture/</loc>
     <lastmod>2025-07-30T17:00:00+02:00</lastmod>
   </url><url>
-    <loc>http://localhost:1313/docs/</loc>
+    <loc>https://openphysis.amelia-krasucka.pl/docs/</loc>
     <lastmod>2025-07-30T17:00:00+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="http://localhost:1313/pl/docs/"
+                href="https://openphysis.amelia-krasucka.pl/pl/docs/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/docs/"
+                href="https://openphysis.amelia-krasucka.pl/docs/"
                 />
   </url><url>
-    <loc>http://localhost:1313/</loc>
+    <loc>https://openphysis.amelia-krasucka.pl/</loc>
     <lastmod>2025-07-30T16:00:00+02:00</lastmod>
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="http://localhost:1313/pl/"
+                href="https://openphysis.amelia-krasucka.pl/pl/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/"
+                href="https://openphysis.amelia-krasucka.pl/"
                 />
   </url><url>
-    <loc>http://localhost:1313/categories/</loc>
+    <loc>https://openphysis.amelia-krasucka.pl/categories/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="http://localhost:1313/pl/categories/"
+                href="https://openphysis.amelia-krasucka.pl/pl/categories/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/categories/"
+                href="https://openphysis.amelia-krasucka.pl/categories/"
                 />
   </url><url>
-    <loc>http://localhost:1313/tags/</loc>
+    <loc>https://openphysis.amelia-krasucka.pl/tags/</loc>
     <xhtml:link
                 rel="alternate"
                 hreflang="pl"
-                href="http://localhost:1313/pl/tags/"
+                href="https://openphysis.amelia-krasucka.pl/pl/tags/"
                 />
     <xhtml:link
                 rel="alternate"
                 hreflang="en"
-                href="http://localhost:1313/tags/"
+                href="https://openphysis.amelia-krasucka.pl/tags/"
                 />
   </url>
 </urlset>

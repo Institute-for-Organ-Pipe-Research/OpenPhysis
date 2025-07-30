@@ -1,12 +1,12 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
     <title>OpenPhysis powerade by FONUS – Categories</title>
-    <link>http://localhost:1313/pl/categories/</link>
+    <link>https://openphysis.amelia-krasucka.pl/pl/categories/</link>
     <description>Recent content in Categories on OpenPhysis powerade by FONUS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>pl</language>
     
-	  <atom:link href="http://localhost:1313/pl/categories/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://openphysis.amelia-krasucka.pl/pl/categories/index.xml" rel="self" type="application/rss+xml" />
     
     
       
