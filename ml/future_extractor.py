@@ -1,123 +1,147 @@
-from pathlib import Path
 import numpy as np
+import matplotlib.pyplot as plt
+import scipy.signal
+from pathlib import Path
 import librosa
-from scipy.signal import hilbert
-import csv
-import os
 
+class AudioSignal:
+    def __init__(self):
+        self.audio = None
+        self.sr = None
 
-def extract_adsr(audio, sr, threshold=0.05):
-    try:
-        if len(audio) == 0:
-            return 0.05, 0.05, 0.7, 0.1
-        
-        analytic_signal = hilbert(audio)
+    def open_audio(self, path_audio):
+        self.audio, self.sr = librosa.load(path_audio, sr=None)
+
+class ADSRExtractor:
+    def __init__(self, path):
+        self.signal = AudioSignal()
+        self.signal.open_audio(path)
+        self.envelope = self.compute_envelope()
+        self.attack = self.detect_attack_end()
+        self.decay = self.detect_decay_end(self.attack['i'])
+        self.release = self.detect_release_start(self.decay['i'])
+        self.sustain_level = self.calculate_sustain_level(self.decay['i'], self.release['i'])
+
+    def compute_envelope(self):
+        analytic_signal = scipy.signal.hilbert(self.signal.audio)
         envelope = np.abs(analytic_signal)
-        envelope = envelope / (np.max(envelope) + 1e-6)
-        
-        above_threshold = envelope > threshold
-        attack_end = np.argmax(above_threshold) if np.any(above_threshold) else len(envelope)//10
-        
-        decay_phase = envelope[attack_end:] < 0.7
-        decay_end = attack_end + np.argmax(decay_phase) if np.any(decay_phase) else len(envelope)//2
-        
-        release_phase = envelope[::-1] > threshold
-        release_start = len(envelope) - np.argmax(release_phase) if np.any(release_phase) else len(envelope)*9//10
-        
-        attack_time = attack_end / sr
-        decay_time = (decay_end - attack_end) / sr
-        sustain_level = np.mean(envelope[decay_end:release_start]) if release_start > decay_end else 0.7
-        release_time = (len(envelope) - release_start) / sr
-        
-        return max(0.01, attack_time), max(0.01, decay_time), np.clip(sustain_level, 0, 1), max(0.01, release_time)
-    except Exception as e:
-        print(f"Błąd w extract_adsr: {e}")
-        return 0.05, 0.05, 0.7, 0.1
+        # Normalizacja względem amplitudy sygnału audio
+        norm_envelope = envelope / (np.max(np.abs(self.signal.audio)) + 1e-6)
+        return norm_envelope
 
-def extract_features(audio, sr):
-    try:
-        # 1. ADSR (4 cechy)
-        attack, decay, sustain, release = extract_adsr(audio, sr)
-        
-        # 2. MFCC (13 cech)
-        mfcc = librosa.feature.mfcc(y=audio, sr=sr, n_mfcc=13)
-        mfcc_means = np.mean(mfcc, axis=1)
-        
-        # 3. Chroma (12 cech)
-        chroma = librosa.feature.chroma_stft(y=audio, sr=sr)
-        chroma_means = np.mean(chroma, axis=1)
-        
-        # 4. Inne cechy (4)
-        spectral_centroid = np.mean(librosa.feature.spectral_centroid(y=audio, sr=sr))
-        spectral_bandwidth = np.mean(librosa.feature.spectral_bandwidth(y=audio, sr=sr))
-        zero_crossing = np.mean(librosa.feature.zero_crossing_rate(y=audio))
-        rms = np.mean(librosa.feature.rms(y=audio))
-        
-        features = np.concatenate([
-            [attack, decay, sustain, release],  # 4
-            mfcc_means,                        # 13
-            chroma_means,                      # 12
-            [spectral_centroid, spectral_bandwidth, zero_crossing, rms]  # 4
-        ])
-        
-        # Dodatkowe cechy jeśli potrzebne (do 33)
-        if len(features) < 33:
-            extra = np.zeros(33 - len(features))
-            features = np.concatenate([features, extra])
-            
-        return features[:33]  # Zawsze 33 cechy
-    
-    except Exception as e:
-        print(f"Błąd w extract_features: {e}")
-        return np.zeros(33)  # Zwraca wektor zerowy o długości 33
+    def detect_attack_end(self, slope_threshold=-0.01, flat_threshold=0.002):
+        sr = self.signal.sr
+        slope = np.diff(self.envelope)
+        max_idx = np.argmax(self.envelope)
 
-def export_features_to_csv(data, output_file, append=False, include_voice_name=False):
-    file_exists = os.path.isfile(output_file)
-    mode = 'a' if append else 'w'
+        for i in range(max_idx, len(slope) - 10):
+            window = slope[i:i+10]
+            if np.all(np.abs(window) < flat_threshold):
+                return {'i': i, 'time': i / sr}
 
-    with open(output_file, mode, newline='', encoding='utf-8') as csvfile:
-        writer = csv.writer(csvfile)
+        return {'i': -1, 'time': -1.0}
 
-        if not append or not file_exists:
-            header = ['filename']
-            if include_voice_name:
-                header.append('voice_name')
-            header += [f'feature_{i+1}' for i in range(len(data[0][1]))]
-            writer.writerow(header)
+    def detect_decay_end(self, attack_end_idx, threshold_slope=0.005, min_decay_duration=10000, window_confirm=50):
+        """
+        Detekcja końca fazy decay oparta na pochodnych.
+        """
+        sr = self.signal.sr
+        env = self.envelope
+        slope = np.diff(env)
 
-        for record in data:
-            if include_voice_name:
-                filename, features, voice_name = record
-                row = [filename, voice_name] + list(features)
-            else:
-                filename, features = record
-                row = [filename] + list(features)
-            writer.writerow(row)
+        start_idx = attack_end_idx + min_decay_duration
+        end_idx = len(slope) - window_confirm
+
+        for i in range(start_idx, end_idx):
+            window = slope[i:i + window_confirm]
+            if np.all(np.abs(window) < threshold_slope):
+                return {'i': i, 'time': i / sr}
+
+        # Jeżeli nie znaleziono końca decay
+        return {'i': -1, 'time': -1.0}
+
+    def detect_release_start(self, decay_end_idx, threshold_release=0.001, window_confirm=100):
+        sr = self.signal.sr
+        slope = np.diff(self.envelope)
+        # Szukamy wstecz, od końca sygnału do decay_end_idx
+        for i in range(len(slope) - window_confirm, decay_end_idx, -1):
+            window = slope[i - window_confirm:i]
+            if np.all(window < -threshold_release):
+                return {'i': i, 'time': i / sr}
+        return {'i': -1, 'time': -1.0}
+
+    def calculate_sustain_level(self, decay_end_idx, release_start_idx):
+        if decay_end_idx == -1:
+            return -1
+        if release_start_idx == -1:
+            # Jeśli nie znaleziono release, sustain liczymy do końca sygnału
+            sustain_region = self.envelope[decay_end_idx:]
+        else:
+            sustain_region = self.envelope[decay_end_idx:release_start_idx]
+
+        if len(sustain_region) == 0:
+            return -1
+        return np.mean(sustain_region)
+
+
+    def extract(self):
+        return {
+            "attack_idx": self.attack['i'],
+            "attack_time": self.attack['time'],
+            "decay_idx": self.decay['i'],
+            "decay_time": self.decay['time'],
+            "sustain_level": self.sustain_level,
+            "release_idx": self.release['i'],
+            "release_time": self.release['time']
+        }
+
+def plot_adsr(extractor):
+    audio = extractor.signal.audio
+    envelope = extractor.envelope
+    sr = extractor.signal.sr
+    times = np.arange(len(audio)) / sr
+
+    plt.figure(figsize=(12, 6))
+    plt.plot(times, envelope, label='Obwiednia', linewidth=2)
+
+    if extractor.attack['i'] != -1:
+        plt.axvline(extractor.attack['time'], color='green', linestyle='--', label=f'End attack: {extractor.attack["time"]:.3f}s')
+    if extractor.decay['i'] != -1:
+        plt.axvline(extractor.decay['time'], color='red', linestyle='--', label=f'End decay: {extractor.decay["time"]:.3f}s')
+    if extractor.release['i'] != -1:
+        plt.axvline(extractor.release['time'], color='purple', linestyle='--', label=f'Start release: {extractor.release["time"]:.3f}s')
+
+    # Pokazujemy sustain jako poziomą linię
+    if extractor.sustain_level != -1:
+        plt.hlines(extractor.sustain_level, extractor.decay['time'], extractor.release['time'], colors='orange', linestyles='-', label='Sustain level')
+
+    plt.xlabel("Czas [s]")
+    plt.ylabel("Amplituda")
+    plt.title("Obwiednia i fazy ADSR")
+    plt.legend()
+    plt.grid(True)
+    plt.tight_layout()
+    plt.show()
 
 def main():
     base_dir = Path(__file__).parent
-    synthetic_dir = base_dir / "synthetic_data"
-    acoustic_dir = base_dir / "acoustic_data"
+    acoustic_dir = base_dir / "acoustic_data/hauptwerk-principal8-001"
+    wav_files = list(acoustic_dir.glob("*.wav")) + list(acoustic_dir.glob("*.WAV"))
 
-    output_csv = base_dir / "extracted_features.csv"
-    all_data = []
+    if not wav_files:
+        print("Brak plików WAV!")
+        return
 
-    # Przetwarzanie plików syntetycznych
-    for wav_file in synthetic_dir.glob("*.wav"):
-        audio, sr = librosa.load(str(wav_file), sr=44100)
-        features = extract_features(audio, sr)
-        all_data.append((wav_file.name, features, "synthetic"))
+    first_wav = wav_files[0]
+    print(f"Testuję plik: {first_wav.name}")
 
-    # Przetwarzanie plików akustycznych
-    for wav_file in acoustic_dir.rglob("*.wav"):
-        audio, sr = librosa.load(str(wav_file), sr=44100)
-        features = extract_features(audio, sr)
-        # Dla voice_name proponuję użyć nazwy podfolderu jako głosu
-        voice_name = wav_file.parent.name  
-        all_data.append((wav_file.name, features, voice_name))
-
-    export_features_to_csv(all_data, str(output_csv), append=False, include_voice_name=True)
-    print(f"Zapisano cechy do {output_csv}")
+    try:
+        extractor = ADSRExtractor(str(first_wav))
+        result = extractor.extract()
+        print(f"Wynik extract(): {result}")
+        plot_adsr(extractor)
+    except Exception as e:
+        print(f"Błąd podczas przetwarzania pliku {first_wav.name}: {e}")
 
 if __name__ == "__main__":
     main()
