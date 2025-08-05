@@ -1,0 +1,70 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenPhysis powerade by FONUS – OpenPhysis blog</title><link>https://openphysis.amelia-krasucka.pl/pl/blog/</link><description>Recent content in OpenPhysis blog on OpenPhysis powerade by FONUS</description><generator>Hugo -- gohugo.io</generator><language>pl</language><lastBuildDate>Mon, 04 Aug 2025 16:00:00 +0200</lastBuildDate><atom:link href="https://openphysis.amelia-krasucka.pl/pl/blog/index.xml" rel="self" type="application/rss+xml"/><item><title>Obecny model uczenia maszynowego nie działa. Co z nim jest nie tak?</title><link>https://openphysis.amelia-krasucka.pl/pl/blog/blog-1/</link><pubDate>Mon, 04 Aug 2025 16:00:00 +0200</pubDate><guid>https://openphysis.amelia-krasucka.pl/pl/blog/blog-1/</guid><description>
+&lt;p>W trakcie analizy kodu uczenia maszynowego zauważyłam kilka kluczowych problemów, które mogą wpływać na jakość wyników:&lt;/p>
+&lt;ul>
+&lt;li>brak eksportu fazy harmonicznych (ang. &lt;em>harmonic phase&lt;/em>),&lt;/li>
+&lt;li>zbyt duże poleganie na parametrach MCFF (&lt;em>Monte Carlo Force Field&lt;/em>),&lt;/li>
+&lt;li>brak przekształcenia obwiedni ADSR (&lt;em>Attack, Decay, Sustain, Release&lt;/em>) do zestawu funkcji opisujących jej kształt.&lt;/li>
+&lt;/ul>
+&lt;p>Uczenie maszynowe zaczyna dobierać parametry spoza logicznych zakresów, co skutkuje brakiem spójnych zależności między zmiennymi. Jest to sygnał do pełnego przeglądu kodu i wyeliminowania punktów krytycznych.&lt;/p>
+&lt;p>Jednym z parametrów możliwych do wyprowadzenia analitycznie jest właśnie obwiednia ADSR – była ona już wcześniej zaimplementowana, jednakże uzyskane dane powinny zostać przekształcone do zestawu funkcji opisujących jej dokładny przebieg. Pozwoli to na uproszczenie procesu uczenia i ograniczenie zbędnych stopni swobody.&lt;/p>
+&lt;p>Im więcej takich miejsc zostanie ujednoznacznionych i wzmocnionych logiczną strukturą, tym większa szansa na uzyskanie lepszych, stabilniejszych wyników modelowania.&lt;/p>
+&lt;p>Zauważyłam również, że model syntezy dźwięku musi dynamicznie przyjmować parametry – nie tylko z myślą o przetwarzaniu &lt;em>real-time&lt;/em> czy symulacji fizycznych zjawisk akustycznych. W szczególności, faza &lt;em>Attack&lt;/em> (atak) w obwiedni ADSR może wymagać aktualizacji w czasie trwania dźwięku.&lt;/p>
+&lt;p>W praktyce:&lt;/p>
+&lt;ul>
+&lt;li>rzeczywista piszczałka organowa nie zawsze od razu generuje częstotliwość podstawową,&lt;/li>
+&lt;li>początkowe oscylacje często zawierają chaotyczny lub niestabilny przebieg, który dopiero po ułamku sekundy stabilizuje się do tonu zasadniczego,&lt;/li>
+&lt;li>model powinien mieć możliwość dynamicznej adaptacji do tej zmienności – np. przez reanalizę parametrów w krótkim buforze czasowym.&lt;/li>
+&lt;/ul>
+&lt;p>Wprowadzenie dynamicznych komponentów do fazy &lt;em>Attack&lt;/em> może poprawić realizm syntezowanego dźwięku i zbliżyć go do zachowania rzeczywistych instrumentów akustycznych.&lt;/p>
+&lt;p>Zabiegiem, który może znacząco usprawnić proces analizy i przetwarzania danych, będzie utworzenie słownika – np. w postaci dwuwymiarowej tablicy &lt;code>numpy&lt;/code> – w której klucz odnosi się do kodu dźwięku MIDI, a wartość do odpowiadającej mu częstotliwości podstawowej dźwięku.&lt;/p>
+&lt;p>Dobrze przygotowany słownik częstotliwości, sprzężony z funkcjami analitycznymi (np. obwiednią ADSR) i logicznie wyznaczonymi ograniczeniami parametrów, może znacząco podnieść jakość predykcji modelu i ogólną stabilność procesu uczenia.&lt;/p>
+&lt;p>Warto podkreślić, że odchylenia względem słownika częstotliwości MIDI nie stanowią problemu – są one wręcz naturalne przy analizie rzeczywistych próbek dźwięku. Istotne jest jednak, aby w ramach przygotowania danych wejściowych dokonywać przekształcenia sygnału do najbliższej częstotliwości podstawowej ze słownika.&lt;/p>
+&lt;p>Taka operacja służy:&lt;/p>
+&lt;ul>
+&lt;li>normalizacji parametrów uczenia maszynowego,&lt;/li>
+&lt;li>uproszczeniu porównań między próbkami,&lt;/li>
+&lt;li>ograniczeniu wpływu mikroodchyleń strojenia (np. wynikających z temperacji lub ekspresji wykonawczej),&lt;/li>
+&lt;li>ułatwieniu przypisania klas dźwięku (MIDI ↔ częstotliwość).&lt;/li>
+&lt;/ul>
+&lt;p>Dzięki temu proces treningu sieci może być bardziej stabilny, a model unika niepożądanej nadwrażliwości na nieregularności sygnału.&lt;/p>
+&lt;p>Obecnie struktura cech wyglądała następująco:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Obwiednia&lt;/th>
+&lt;th>MFCC&lt;/th>
+&lt;th>Chroma&lt;/th>
+&lt;th>Inne cechy&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Attack, Decay, Sustain, Release&lt;/td>
+&lt;td>13&lt;/td>
+&lt;td>12&lt;/td>
+&lt;td>spectral centroid, spectral bandwidth, zero crossing, RMS&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200">
+&lt;p class="hx-flex hx-items-center hx-font-medium">&lt;svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>&lt;/svg>Note&lt;/p>
+&lt;div class="hx-w-full hx-min-w-0 hx-leading-7">
+&lt;div class="hx-mt-6 hx-leading-7 first:hx-mt-0">&lt;p>Jak widać, model uczenia maszynowego nie porównuje wygenerowanego syntetycznego dźwięku poprzez rozkład harmonicznych (&lt;em>harmonic decomposition&lt;/em>).&lt;/p>
+&lt;p>Obecny model &lt;strong>nie mógł działać prawidłowo&lt;/strong> – cechy takie jak &lt;strong>MFCC&lt;/strong> (&lt;em>Mel-Frequency Cepstral Coefficients&lt;/em>) *&lt;em>nie dostarczają pełnych informacji o strukturze dźwięku!&lt;/em>&lt;/p>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;p>MFCC dobrze sprawdzają się w rozpoznawaniu mowy, ale w kontekście syntezy instrumentów – zwłaszcza piszczałek organowych – pomijają wiele istotnych aspektów, takich jak:&lt;/p>
+&lt;ul>
+&lt;li>pełne widmo harmoniczne (amplituda i faza),&lt;/li>
+&lt;li>nieliniowe zmiany w czasie,&lt;/li>
+&lt;li>charakterystyka ataku i zaniku.&lt;/li>
+&lt;/ul>
+&lt;div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300">
+&lt;p class="hx-flex hx-items-center hx-font-medium">Conclusion&lt;/p>
+&lt;div class="hx-w-full hx-min-w-0 hx-leading-7">
+&lt;div class="hx-mt-6 hx-leading-7 first:hx-mt-0">&lt;p>Rozwarzam przejście do pełniejszej reprezentacji widmowej – np. harmonicznego rozkładu amplitud i faz lub bezpośredniego porównania z użyciem STFT.&lt;/p>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;p>Już w fazie wyznaczenia punktów obwiedni można natrafić na trudności. Koniec fazy ataku jest zbyt wcześnie obliczana. Obrazuje to wykres. Dzieje się tak próbując wyznaczyć koniec fazy ataku za pomocą określonego poziomu aplitudy np. threshold=0.9 i nie badając pochochodnych i wypłaszczenia otzrymuje się nie prawidłowe wyniki. Szukając nie tylko pierwszego spadku pochodnej,
+ale maksimum obwiedni i jej ustabilizowania koniec fazy ataku jest prawidłowy.&lt;/p>
+&lt;p>&lt;img src="https://openphysis.amelia-krasucka.pl/images/blog-1-fazy-adsr.png" alt="Wykres przedstawiający wyznaczony koniec fazy ataku próbki w zależności od metody" loading="lazy" />&lt;/p></description></item></channel></rss>

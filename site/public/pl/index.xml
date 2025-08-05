@@ -14,5 +14,89 @@
       
     
     
+    <item>
+      <title>Obecny model uczenia maszynowego nie działa. Co z nim jest nie tak?</title>
+      <link>http://localhost:1313/pl/blog/blog-1/</link>
+      <pubDate>Mon, 04 Aug 2025 16:00:00 +0200</pubDate>
+      
+      <guid>http://localhost:1313/pl/blog/blog-1/</guid>
+      <description>
+        
+        
+        &lt;p&gt;W trakcie analizy kodu uczenia maszynowego zauważyłam kilka kluczowych problemów, które mogą wpływać na jakość wyników:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;brak eksportu fazy harmonicznych (ang. &lt;em&gt;harmonic phase&lt;/em&gt;),&lt;/li&gt;
+&lt;li&gt;zbyt duże poleganie na parametrach MCFF (&lt;em&gt;Monte Carlo Force Field&lt;/em&gt;),&lt;/li&gt;
+&lt;li&gt;brak przekształcenia obwiedni ADSR (&lt;em&gt;Attack, Decay, Sustain, Release&lt;/em&gt;) do zestawu funkcji opisujących jej kształt.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Uczenie maszynowe zaczyna dobierać parametry spoza logicznych zakresów, co skutkuje brakiem spójnych zależności między zmiennymi. Jest to sygnał do pełnego przeglądu kodu i wyeliminowania punktów krytycznych.&lt;/p&gt;
+&lt;p&gt;Jednym z parametrów możliwych do wyprowadzenia analitycznie jest właśnie obwiednia ADSR – była ona już wcześniej zaimplementowana, jednakże uzyskane dane powinny zostać przekształcone do zestawu funkcji opisujących jej dokładny przebieg. Pozwoli to na uproszczenie procesu uczenia i ograniczenie zbędnych stopni swobody.&lt;/p&gt;
+&lt;p&gt;Im więcej takich miejsc zostanie ujednoznacznionych i wzmocnionych logiczną strukturą, tym większa szansa na uzyskanie lepszych, stabilniejszych wyników modelowania.&lt;/p&gt;
+&lt;p&gt;Zauważyłam również, że model syntezy dźwięku musi dynamicznie przyjmować parametry – nie tylko z myślą o przetwarzaniu &lt;em&gt;real-time&lt;/em&gt; czy symulacji fizycznych zjawisk akustycznych. W szczególności, faza &lt;em&gt;Attack&lt;/em&gt; (atak) w obwiedni ADSR może wymagać aktualizacji w czasie trwania dźwięku.&lt;/p&gt;
+&lt;p&gt;W praktyce:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;rzeczywista piszczałka organowa nie zawsze od razu generuje częstotliwość podstawową,&lt;/li&gt;
+&lt;li&gt;początkowe oscylacje często zawierają chaotyczny lub niestabilny przebieg, który dopiero po ułamku sekundy stabilizuje się do tonu zasadniczego,&lt;/li&gt;
+&lt;li&gt;model powinien mieć możliwość dynamicznej adaptacji do tej zmienności – np. przez reanalizę parametrów w krótkim buforze czasowym.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Wprowadzenie dynamicznych komponentów do fazy &lt;em&gt;Attack&lt;/em&gt; może poprawić realizm syntezowanego dźwięku i zbliżyć go do zachowania rzeczywistych instrumentów akustycznych.&lt;/p&gt;
+&lt;p&gt;Zabiegiem, który może znacząco usprawnić proces analizy i przetwarzania danych, będzie utworzenie słownika – np. w postaci dwuwymiarowej tablicy &lt;code&gt;numpy&lt;/code&gt; – w której klucz odnosi się do kodu dźwięku MIDI, a wartość do odpowiadającej mu częstotliwości podstawowej dźwięku.&lt;/p&gt;
+&lt;p&gt;Dobrze przygotowany słownik częstotliwości, sprzężony z funkcjami analitycznymi (np. obwiednią ADSR) i logicznie wyznaczonymi ograniczeniami parametrów, może znacząco podnieść jakość predykcji modelu i ogólną stabilność procesu uczenia.&lt;/p&gt;
+&lt;p&gt;Warto podkreślić, że odchylenia względem słownika częstotliwości MIDI nie stanowią problemu – są one wręcz naturalne przy analizie rzeczywistych próbek dźwięku. Istotne jest jednak, aby w ramach przygotowania danych wejściowych dokonywać przekształcenia sygnału do najbliższej częstotliwości podstawowej ze słownika.&lt;/p&gt;
+&lt;p&gt;Taka operacja służy:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;normalizacji parametrów uczenia maszynowego,&lt;/li&gt;
+&lt;li&gt;uproszczeniu porównań między próbkami,&lt;/li&gt;
+&lt;li&gt;ograniczeniu wpływu mikroodchyleń strojenia (np. wynikających z temperacji lub ekspresji wykonawczej),&lt;/li&gt;
+&lt;li&gt;ułatwieniu przypisania klas dźwięku (MIDI ↔ częstotliwość).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Dzięki temu proces treningu sieci może być bardziej stabilny, a model unika niepożądanej nadwrażliwości na nieregularności sygnału.&lt;/p&gt;
+&lt;p&gt;Obecnie struktura cech wyglądała następująco:&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+      &lt;tr&gt;
+          &lt;th&gt;Obwiednia&lt;/th&gt;
+          &lt;th&gt;MFCC&lt;/th&gt;
+          &lt;th&gt;Chroma&lt;/th&gt;
+          &lt;th&gt;Inne cechy&lt;/th&gt;
+      &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+      &lt;tr&gt;
+          &lt;td&gt;Attack, Decay, Sustain, Release&lt;/td&gt;
+          &lt;td&gt;13&lt;/td&gt;
+          &lt;td&gt;12&lt;/td&gt;
+          &lt;td&gt;spectral centroid, spectral bandwidth, zero crossing, RMS&lt;/td&gt;
+      &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;&lt;svg height=16px class=&#34;hx-inline-block hx-align-middle hx-mr-2&#34; xmlns=&#34;http://www.w3.org/2000/svg&#34; fill=&#34;none&#34; viewBox=&#34;0 0 24 24&#34; stroke-width=&#34;2&#34; stroke=&#34;currentColor&#34; aria-hidden=&#34;true&#34;&gt;&lt;path stroke-linecap=&#34;round&#34; stroke-linejoin=&#34;round&#34; d=&#34;M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z&#34;/&gt;&lt;/svg&gt;Note&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;Jak widać, model uczenia maszynowego nie porównuje wygenerowanego syntetycznego dźwięku poprzez rozkład harmonicznych (&lt;em&gt;harmonic decomposition&lt;/em&gt;).&lt;/p&gt;
+&lt;p&gt;Obecny model &lt;strong&gt;nie mógł działać prawidłowo&lt;/strong&gt; – cechy takie jak &lt;strong&gt;MFCC&lt;/strong&gt; (&lt;em&gt;Mel-Frequency Cepstral Coefficients&lt;/em&gt;) *&lt;em&gt;nie dostarczają pełnych informacji o strukturze dźwięku!&lt;/em&gt;&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;MFCC dobrze sprawdzają się w rozpoznawaniu mowy, ale w kontekście syntezy instrumentów – zwłaszcza piszczałek organowych – pomijają wiele istotnych aspektów, takich jak:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;pełne widmo harmoniczne (amplituda i faza),&lt;/li&gt;
+&lt;li&gt;nieliniowe zmiany w czasie,&lt;/li&gt;
+&lt;li&gt;charakterystyka ataku i zaniku.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div class=&#34;hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300&#34;&gt;
+  &lt;p class=&#34;hx-flex hx-items-center hx-font-medium&#34;&gt;Conclusion&lt;/p&gt;
+
+  &lt;div class=&#34;hx-w-full hx-min-w-0 hx-leading-7&#34;&gt;
+    &lt;div class=&#34;hx-mt-6 hx-leading-7 first:hx-mt-0&#34;&gt;&lt;p&gt;Rozwarzam przejście do pełniejszej reprezentacji widmowej – np. harmonicznego rozkładu amplitud i faz lub bezpośredniego porównania z użyciem STFT.&lt;/p&gt;&lt;/div&gt;
+  &lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Już w fazie wyznaczenia punktów obwiedni można natrafić na trudności. Koniec fazy ataku jest zbyt wcześnie obliczana. Obrazuje to wykres. Dzieje się tak próbując wyznaczyć koniec fazy ataku za pomocą określonego poziomu aplitudy np. threshold=0.9 i nie badając pochochodnych i wypłaszczenia otzrymuje się nie prawidłowe wyniki. Szukając nie tylko pierwszego spadku pochodnej,
+ale maksimum obwiedni i jej ustabilizowania koniec fazy ataku jest prawidłowy.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;http://localhost:1313/images/blog-1-fazy-adsr.png&#34; alt=&#34;Wykres przedstawiający wyznaczony koniec fazy ataku próbki w zależności od metody&#34; loading=&#34;lazy&#34; /&gt;&lt;/p&gt;
+
+      </description>
+    </item>
+    
   </channel>
 </rss>

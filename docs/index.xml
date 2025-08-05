@@ -1,1 +1,69 @@
-<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenPhysis powerade by FONUS – OpenPhysis powerade by FONUS</title><link>https://openphysis.amelia-krasucka.pl/</link><description>Recent content on OpenPhysis powerade by FONUS</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Jul 2025 16:00:00 +0200</lastBuildDate><atom:link href="https://openphysis.amelia-krasucka.pl/index.xml" rel="self" type="application/rss+xml"/></channel></rss>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>OpenPhysis powerade by FONUS – OpenPhysis powerade by FONUS</title><link>https://openphysis.amelia-krasucka.pl/</link><description>Recent content on OpenPhysis powerade by FONUS</description><generator>Hugo -- gohugo.io</generator><language>en</language><lastBuildDate>Wed, 30 Jul 2025 16:00:00 +0200</lastBuildDate><atom:link href="https://openphysis.amelia-krasucka.pl/index.xml" rel="self" type="application/rss+xml"/><item><title>Current Machine Learning Model Does Not Work. What Is Wrong With It?</title><link>https://openphysis.amelia-krasucka.pl/blog/blog-1/</link><pubDate>Mon, 04 Aug 2025 16:00:00 +0200</pubDate><guid>https://openphysis.amelia-krasucka.pl/blog/blog-1/</guid><description>
+&lt;p>During the analysis of the machine learning code, I noticed several key issues that may affect the quality of the results:&lt;/p>
+&lt;ul>
+&lt;li>lack of export of harmonic phase,&lt;/li>
+&lt;li>excessive reliance on MCFF (&lt;em>Monte Carlo Force Field&lt;/em>) parameters,&lt;/li>
+&lt;li>absence of transformation of the ADSR (&lt;em>Attack, Decay, Sustain, Release&lt;/em>) envelope into a set of descriptive functions characterizing its shape.&lt;/li>
+&lt;/ul>
+&lt;p>The machine learning starts to select parameters outside logical ranges, resulting in no consistent relationships between variables. This signals the need for a full code review and elimination of critical points.&lt;/p>
+&lt;p>One parameter that can be analytically derived is the ADSR envelope – it was previously implemented, but the obtained data should be transformed into a set of functions describing its precise course. This will simplify the learning process and reduce unnecessary degrees of freedom.&lt;/p>
+&lt;p>The more such parts are unambiguously defined and reinforced by logical structure, the higher the chance of achieving better, more stable modeling results.&lt;/p>
+&lt;p>I also noticed that the sound synthesis model must dynamically accept parameters – not only with real-time processing or physical acoustic simulation in mind. In particular, the &lt;em>Attack&lt;/em> phase of the ADSR envelope may require updating during the sound duration.&lt;/p>
+&lt;p>In practice:&lt;/p>
+&lt;ul>
+&lt;li>a real organ pipe does not always immediately produce the fundamental frequency,&lt;/li>
+&lt;li>initial oscillations often contain chaotic or unstable behavior that only stabilizes into the fundamental tone after a fraction of a second,&lt;/li>
+&lt;li>the model should be able to dynamically adapt to this variability – for example, by reanalyzing parameters in a short time buffer.&lt;/li>
+&lt;/ul>
+&lt;p>Introducing dynamic components into the &lt;em>Attack&lt;/em> phase could improve the realism of the synthesized sound and bring it closer to the behavior of real acoustic instruments.&lt;/p>
+&lt;p>An operation that can significantly improve the data analysis and processing is creating a dictionary – e.g., as a two-dimensional &lt;code>numpy&lt;/code> array – where the key corresponds to the MIDI sound code, and the value corresponds to the fundamental frequency of that sound.&lt;/p>
+&lt;p>A well-prepared frequency dictionary, coupled with analytical functions (e.g., ADSR envelope) and logically determined parameter constraints, can greatly enhance model prediction quality and overall training stability.&lt;/p>
+&lt;p>It is important to emphasize that deviations from the MIDI frequency dictionary are not a problem – they are natural when analyzing real sound samples. However, it is essential that input data preparation includes mapping the signal to the closest fundamental frequency from the dictionary.&lt;/p>
+&lt;p>Such an operation serves:&lt;/p>
+&lt;ul>
+&lt;li>normalization of machine learning parameters,&lt;/li>
+&lt;li>simplification of comparisons between samples,&lt;/li>
+&lt;li>limiting the impact of micro-tuning deviations (e.g., from temperament or expressive performance),&lt;/li>
+&lt;li>facilitating assignment of sound classes (MIDI ↔ frequency).&lt;/li>
+&lt;/ul>
+&lt;p>Thanks to this, the network training process can be more stable, and the model avoids unwanted sensitivity to signal irregularities.&lt;/p>
+&lt;p>Currently, the feature structure looked like this:&lt;/p>
+&lt;table>
+&lt;thead>
+&lt;tr>
+&lt;th>Envelope&lt;/th>
+&lt;th>MFCC&lt;/th>
+&lt;th>Chroma&lt;/th>
+&lt;th>Other Features&lt;/th>
+&lt;/tr>
+&lt;/thead>
+&lt;tbody>
+&lt;tr>
+&lt;td>Attack, Decay, Sustain, Release&lt;/td>
+&lt;td>13&lt;/td>
+&lt;td>12&lt;/td>
+&lt;td>spectral centroid, spectral bandwidth, zero crossing, RMS&lt;/td>
+&lt;/tr>
+&lt;/tbody>
+&lt;/table>
+&lt;div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200">
+&lt;p class="hx-flex hx-items-center hx-font-medium">&lt;svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true">&lt;path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>&lt;/svg>Note&lt;/p>
+&lt;div class="hx-w-full hx-min-w-0 hx-leading-7">
+&lt;div class="hx-mt-6 hx-leading-7 first:hx-mt-0">&lt;p>As can be seen, the machine learning model does not compare the generated synthetic sound by harmonic decomposition.&lt;/p>
+&lt;p>The current model &lt;strong>could not work properly&lt;/strong> – features like &lt;strong>MFCC&lt;/strong> (&lt;em>Mel-Frequency Cepstral Coefficients&lt;/em>) &lt;strong>do not provide complete information about the sound structure!&lt;/strong>&lt;/p>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;p>MFCCs work well in speech recognition but in the context of instrument synthesis – especially organ pipes – they omit many important aspects such as:&lt;/p>
+&lt;ul>
+&lt;li>full harmonic spectrum (amplitude and phase),&lt;/li>
+&lt;li>nonlinear changes over time,&lt;/li>
+&lt;li>characteristics of attack and decay.&lt;/li>
+&lt;/ul>
+&lt;div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-orange-100 hx-bg-orange-50 hx-text-orange-800 dark:hx-border-orange-400/30 dark:hx-bg-orange-400/20 dark:hx-text-orange-300">
+&lt;p class="hx-flex hx-items-center hx-font-medium">Conclusion&lt;/p>
+&lt;div class="hx-w-full hx-min-w-0 hx-leading-7">
+&lt;div class="hx-mt-6 hx-leading-7 first:hx-mt-0">&lt;p>I am considering moving to a fuller spectral representation – e.g., harmonic amplitude and phase decomposition or direct comparison using STFT.&lt;/p>&lt;/div>
+&lt;/div>
+&lt;/div>
+&lt;p>Already at the stage of determining envelope points, difficulties may arise. The attack phase end is computed too early. This is shown in the plot. This happens when trying to find the attack end using a fixed amplitude level, e.g., threshold=0.9, without examining derivatives and flattening — it gives incorrect results. By searching not only for the first derivative drop but for the envelope maximum and its stabilization, the attack phase end is correctly determined.&lt;/p>
+&lt;p>&lt;img src="https://openphysis.amelia-krasucka.pl/images/blog-1-fazy-adsr.png" alt="Plot showing detected attack phase end of the sample depending on the method" loading="lazy" />&lt;/p></description></item></channel></rss>
