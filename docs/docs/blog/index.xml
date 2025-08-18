@@ -1,16 +1,17 @@
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>OpenPhysis powerade by FONUS – OpenPhysis powerade by FONUS</title>
-    <link>https://openphysis.amelia-krasucka.pl/</link>
-    <description>Recent content on OpenPhysis powerade by FONUS</description>
+    <title>OpenPhysis powerade by FONUS – OpenPhysis blog</title>
+    <link>https://openphysis.amelia-krasucka.pl/blog/</link>
+    <description>Recent content in OpenPhysis blog on OpenPhysis powerade by FONUS</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en</language>
-    <lastBuildDate>Wed, 30 Jul 2025 16:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Mon, 04 Aug 2025 16:00:00 +0200</lastBuildDate>
     
-	  <atom:link href="https://openphysis.amelia-krasucka.pl/index.xml" rel="self" type="application/rss+xml" />
+	  <atom:link href="https://openphysis.amelia-krasucka.pl/blog/index.xml" rel="self" type="application/rss+xml" />
     
     
       
+        
       
     
     

@@ -1,9 +1,8 @@
 <!DOCTYPE html>
-<html lang="en"><head>
-	<meta name="generator" content="Hugo 0.148.2">
+<html lang="en"><head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="robots" content="index, follow" />
+  <meta name="robots" content="noindex, nofollow" />
   <link rel="icon shortcut" href="/favicon.ico" sizes="32x32" />
 <link rel="icon" href="/favicon.svg" type="image/svg+xml" />
 <link rel="icon" href="/favicon-dark.svg" type="image/svg+xml" media="(prefers-color-scheme: dark)" />
@@ -11,35 +10,72 @@
 <link rel="icon" href="/favicon-32x32.png" type="image/png" sizes="32x32" />
 <link rel="apple-touch-icon" href="/apple-touch-icon.png" sizes="180x180" />
 <link fetchpriority="low" href="/site.webmanifest" rel="manifest" />
-<title>OpenPhysis powerade by FONUS</title>
-  <meta name="description" content="" /><link rel="canonical" href="https://openphysis.amelia-krasucka.pl/" itemprop="url" />
+<title>Architecture – OpenPhysis powerade by FONUS</title>
+  <meta name="description" content="Planned Project Structure Currently, everything is in one repository. In the future, the project will be divided into modules:
+Repository (planned) Description OpenPhysis Main VPO application, interface, instrument configuration fonus-core DSP engine and spectral synthesis system fonus-ml Machine learning modules for predicting stop parameters fonus-fdtd Physical simulations (FDTD) and scaling data physis-docs Technical and research documentation of the project Current Status (pre-alpha) Prototype of synthesis engine modeled on Viscount Physis (offline) Interactive harmonic component generator (Jupyter) Code refactoring Expansion of engine for real-time operation Integration with ML and FDTD systems " /><link rel="canonical" href="http://localhost:1313/architecture/" itemprop="url" />
 
-<meta property="og:title" content="OpenPhysis powerade by FONUS" />
-<meta property="og:description" content="" />
-<meta property="og:type" content="website" />
-<meta property="og:url" content="https://openphysis.amelia-krasucka.pl/" />
+<meta property="og:title" content="Architecture" />
+<meta property="og:description" content="Planned Project Structure
+    Currently, everything is in one repository. In the future, the project will be divided into modules:
 
-  <meta itemprop="name" content="OpenPhysis powerade by FONUS">
-  <meta itemprop="description" content="Note
-Version: pre-alpha
-Status: Early prototype (experimental)
-What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maximum sound realism, flexibility, and a creative approach to the instrument. It is based on physical modeling rather than samples like Hauptwerk or GrandOrgue. The sound synthesis engine FONUS is based on an algorithm from a Viscount International patent US7442869B2, which is now in the public domain. This ensures maximum sound realism.">
-  <meta itemprop="datePublished" content="2025-07-30T16:00:00+02:00">
-  <meta itemprop="dateModified" content="2025-07-30T16:00:00+02:00">
-  <meta itemprop="wordCount" content="259">
+  
+      
+          Repository (planned)
+          Description
+      
+  
+  
+      
+          OpenPhysis
+          Main VPO application, interface, instrument configuration
+      
+      
+          fonus-core
+          DSP engine and spectral synthesis system
+      
+      
+          fonus-ml
+          Machine learning modules for predicting stop parameters
+      
+      
+          fonus-fdtd
+          Physical simulations (FDTD) and scaling data
+      
+      
+          physis-docs
+          Technical and research documentation of the project
+      
+  
+
+Current Status (pre-alpha)
+    
+ Prototype of synthesis engine modeled on Viscount Physis (offline)
+ Interactive harmonic component generator (Jupyter)
+ Code refactoring
+ Expansion of engine for real-time operation
+ Integration with ML and FDTD systems
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="http://localhost:1313/architecture/" /><meta property="article:section" content="" />
+<meta property="article:published_time" content="2025-07-30T17:00:00+02:00" />
+<meta property="article:modified_time" content="2025-07-30T17:00:00+02:00" />
+
+  <meta itemprop="name" content="Architecture">
+  <meta itemprop="description" content="Planned Project Structure Currently, everything is in one repository. In the future, the project will be divided into modules:
+Repository (planned) Description OpenPhysis Main VPO application, interface, instrument configuration fonus-core DSP engine and spectral synthesis system fonus-ml Machine learning modules for predicting stop parameters fonus-fdtd Physical simulations (FDTD) and scaling data physis-docs Technical and research documentation of the project Current Status (pre-alpha) Prototype of synthesis engine modeled on Viscount Physis (offline) Interactive harmonic component generator (Jupyter) Code refactoring Expansion of engine for real-time operation Integration with ML and FDTD systems">
+  <meta itemprop="datePublished" content="2025-07-30T17:00:00+02:00">
+  <meta itemprop="dateModified" content="2025-07-30T17:00:00+02:00">
+  <meta itemprop="wordCount" content="90">
   <meta name="twitter:card" content="summary">
-  <meta name="twitter:title" content="OpenPhysis powerade by FONUS">
-  <meta name="twitter:description" content="Note
-Version: pre-alpha
-Status: Early prototype (experimental)
-What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maximum sound realism, flexibility, and a creative approach to the instrument. It is based on physical modeling rather than samples like Hauptwerk or GrandOrgue. The sound synthesis engine FONUS is based on an algorithm from a Viscount International patent US7442869B2, which is now in the public domain. This ensures maximum sound realism.">
+  <meta name="twitter:title" content="Architecture">
+  <meta name="twitter:description" content="Planned Project Structure Currently, everything is in one repository. In the future, the project will be divided into modules:
+Repository (planned) Description OpenPhysis Main VPO application, interface, instrument configuration fonus-core DSP engine and spectral synthesis system fonus-ml Machine learning modules for predicting stop parameters fonus-fdtd Physical simulations (FDTD) and scaling data physis-docs Technical and research documentation of the project Current Status (pre-alpha) Prototype of synthesis engine modeled on Viscount Physis (offline) Interactive harmonic component generator (Jupyter) Code refactoring Expansion of engine for real-time operation Integration with ML and FDTD systems">
 
-    <link rel="preload" href="/css/compiled/main.min.e0bb0f28123bf084d555fc9253c6d2aa1443b2dfcde6044741a207eabdc3ddb8.css" as="style" integrity="sha256-4LsPKBI78ITVVfySU8bSqhRDst/N5gRHQaIH6r3D3bg=" />
-    <link href="/css/compiled/main.min.e0bb0f28123bf084d555fc9253c6d2aa1443b2dfcde6044741a207eabdc3ddb8.css" rel="stylesheet" integrity="sha256-4LsPKBI78ITVVfySU8bSqhRDst/N5gRHQaIH6r3D3bg=" />
+    <link href="/css/compiled/main.css" rel="stylesheet" />
 
 
 
-  <link href="/css/custom.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css" rel="stylesheet" integrity="sha256-47DEQpj8HBSa&#43;/TImW&#43;5JCeuQeRkm5NMpJWZG3hSuFU=" />
+  <link href="/css/custom.css" rel="stylesheet" />
 
 
   <script>
@@ -155,42 +191,28 @@ What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maxim
     <ul class="hx-flex hx-flex-col hx-gap-1 md:hx-hidden">
       
       
-          <li class=""><a
+          <li class="open"><a
     class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/blog/"
-    
-  >OpenPhysis blog
-        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
-    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/blog/blog-1/"
-    
-  >Current Machine Learning Model Does Not Work. What Is Wrong With It?
-    </a>
-              
-            </li></ul>
-      </div></li>
-          <li class=""><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/docs/"
-    
-  >Documentation
-        <span class="hextra-sidebar-collapsible-button"><svg fill="none" viewBox="0 0 24 24" stroke="currentColor" class="hx-h-[18px] hx-min-w-[18px] hx-rounded-sm hx-p-0.5 hover:hx-bg-gray-800/5 dark:hover:hx-bg-gray-100/5"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7" class="hx-origin-center hx-transition-transform rtl:-hx-rotate-180"></path></svg></span>
-    </a><div class="ltr:hx-pr-0 hx-overflow-hidden">
-        <ul class='hx-relative hx-flex hx-flex-col hx-gap-1 before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] ltr:hx-ml-3 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-mr-3 rtl:hx-pr-3 rtl:before:hx-right-0 dark:before:hx-bg-neutral-800'><li class="hx-flex hx-flex-col "><a
-    class="hx-flex hx-items-center hx-justify-between hx-gap-2 hx-cursor-pointer hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] [word-break:break-word]
-      hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 contrast-more:hx-border contrast-more:hx-border-transparent contrast-more:hx-text-gray-900 contrast-more:hover:hx-border-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:dark:hx-text-gray-50 contrast-more:dark:hover:hx-border-gray-50"
-    href="/docs/architecture/"
+      sidebar-active-item hx-bg-primary-100 hx-font-semibold hx-text-primary-800 contrast-more:hx-border contrast-more:hx-border-primary-500 dark:hx-bg-primary-400/10 dark:hx-text-primary-600 contrast-more:dark:hx-border-primary-500"
+    href="/architecture/"
     
   >Architecture
     </a>
-              
-            </li></ul>
-      </div></li>
+  
+    <ul class='hx-flex hx-flex-col hx-gap-1 hx-relative before:hx-absolute before:hx-inset-y-1 before:hx-w-px before:hx-bg-gray-200 before:hx-content-[""] dark:before:hx-bg-neutral-800 ltr:hx-pl-3 ltr:before:hx-left-0 rtl:hx-pr-3 rtl:before:hx-right-0 ltr:hx-ml-3 rtl:hx-mr-3'><li>
+              <a
+                href="#planned-project-structure"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >Planned Project Structure</a>
+            </li>
+          <li>
+              <a
+                href="#current-status-pre-alpha"
+                class="hx-flex hx-rounded hx-px-2 hx-py-1.5 hx-text-sm hx-transition-colors [word-break:break-word] hx-cursor-pointer [-webkit-tap-highlight-color:transparent] [-webkit-touch-callout:none] contrast-more:hx-border hx-gap-2 before:hx-opacity-25 before:hx-content-['#'] hx-text-gray-500 hover:hx-bg-gray-100 hover:hx-text-gray-900 dark:hx-text-neutral-400 dark:hover:hx-bg-primary-100/5 dark:hover:hx-text-gray-50 contrast-more:hx-text-gray-900 contrast-more:dark:hx-text-gray-50 contrast-more:hx-border-transparent contrast-more:hover:hx-border-gray-900 contrast-more:dark:hover:hx-border-gray-50"
+              >Current Status (pre-alpha)</a>
+            </li>
+          </ul>
+  </li>
     </ul>
 
     <div class="max-xl:hx-hidden hx-h-0 hx-w-64 hx-shrink-0"></div></div>
@@ -214,7 +236,7 @@ What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maxim
         
         <li class="hx-flex hx-flex-col">
           <a
-            href="/"
+            href="/architecture/"
             class="hx-text-gray-800 dark:hx-text-gray-100 hover:hx-bg-primary-50 hover:hx-text-primary-600 hover:dark:hx-bg-primary-500/10 hover:dark:hx-text-primary-600 hx-relative hx-cursor-pointer hx-whitespace-nowrap hx-py-1.5 hx-transition-colors ltr:hx-pl-3 ltr:hx-pr-9 rtl:hx-pr-3 rtl:hx-pl-9"
           >English<span class="hx-absolute hx-inset-y-0 hx-flex hx-items-center ltr:hx-right-3 rtl:hx-left-3"><svg height=1em width=1em xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></a>
         </li>
@@ -241,19 +263,11 @@ What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maxim
 <nav class="hextra-toc hx-order-last hx-hidden hx-w-64 hx-shrink-0 xl:hx-block print:hx-hidden hx-px-4" aria-label="table of contents">
     <div class="hextra-scrollbar hx-sticky hx-top-16 hx-overflow-y-auto hx-pr-4 hx-pt-6 hx-text-sm [hyphens:auto] hx-max-h-[calc(100vh-var(--navbar-height)-env(safe-area-inset-bottom))] ltr:hx--mr-4 rtl:hx--ml-4"><p class="hx-mb-4 hx-font-semibold hx-tracking-tight">On this page</p><ul>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#what-is-openphysis">What is OpenPhysis?
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#planned-project-structure">Planned Project Structure
         </a>
       </li>
       <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#how-does-openphysis-differ-from-other-vpo-software">How does OpenPhysis differ from other VPO software?
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#what-is-physical-modeling">What is physical modeling?
-        </a>
-      </li>
-      <li class="hx-my-2 hx-scroll-my-6 hx-scroll-py-6">
-        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#notes">Notes
+        <a class="hx-font-semibold hx-inline-block hx-text-gray-500 hover:hx-text-gray-900 dark:hx-text-gray-400 dark:hover:hx-text-gray-300 contrast-more:hx-text-gray-900 contrast-more:hx-underline contrast-more:dark:hx-text-gray-50 hx-w-full hx-break-words" href="#current-status-pre-alpha">Current Status (pre-alpha)
         </a>
       </li></ul>
       <div class="hx-mt-8 hx-border-t hx-bg-white hx-pt-8 hx-shadow-[0_-12px_16px_white] dark:hx-bg-dark dark:hx-shadow-[0_-12px_16px_#111] hx-sticky hx-bottom-0 hx-flex hx-flex-col hx-items-start hx-gap-2 hx-pb-8 dark:hx-border-neutral-800 contrast-more:hx-border-t contrast-more:hx-border-neutral-400 contrast-more:hx-shadow-none contrast-more:dark:hx-border-neutral-400">
@@ -270,41 +284,54 @@ What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maxim
 
     <article class="hx-w-full hx-break-words hx-flex hx-min-h-[calc(100vh-var(--navbar-height))] hx-min-w-0 hx-justify-center hx-pb-8 hx-pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main class="hx-w-full hx-min-w-0 hx-max-w-6xl hx-px-6 hx-pt-4 md:hx-px-12">
-        <h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">OpenPhysis powerade by FONUS</h1>
+        <br class="hx-mt-1.5 hx-text-sm" />
+        <h1 class="hx-text-center hx-mt-2 hx-text-4xl hx-font-bold hx-tracking-tight hx-text-slate-900 dark:hx-text-slate-100">Architecture</h1>
+        <div class="hx-mb-16"></div>
         <div class="content">
-          <p><img src="/images/openphysis-logo.webp" alt="" loading="lazy" /></p>
-<div class="hx-overflow-x-auto hx-mt-6 hx-flex hx-flex-col hx-rounded-lg hx-border hx-py-4 hx-px-4 contrast-more:hx-border-current contrast-more:dark:hx-border-current hx-border-blue-200 hx-bg-blue-100 hx-text-blue-900 dark:hx-border-blue-200/30 dark:hx-bg-blue-900/30 dark:hx-text-blue-200">
-  <p class="hx-flex hx-items-center hx-font-medium"><svg height=16px class="hx-inline-block hx-align-middle hx-mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>Note</p>
-
-  <div class="hx-w-full hx-min-w-0 hx-leading-7">
-    <div class="hx-mt-6 hx-leading-7 first:hx-mt-0"><p><strong>Version:</strong> pre-alpha<br>
-<strong>Status:</strong> Early prototype (experimental)</p></div>
-  </div>
-</div>
-<h2>What is OpenPhysis?<span class="hx-absolute -hx-mt-20" id="what-is-openphysis"></span>
-    <a href="#what-is-openphysis" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p><strong>OpenPhysis</strong> is virtual pipe organ software designed for maximum sound realism, flexibility, and a creative approach to the instrument. It is based on physical modeling rather than samples like Hauptwerk or GrandOrgue. The sound synthesis engine <em><strong>FONUS</strong></em> is based on an algorithm from a Viscount International patent <a href="https://patents.google.com/patent/US7442869B2/en" target="_blank" rel="noopener">US7442869B2</a>, which is now in the public domain. This ensures maximum sound realism.</p>
-<h2>How does OpenPhysis differ from other VPO software?<span class="hx-absolute -hx-mt-20" id="how-does-openphysis-differ-from-other-vpo-software"></span>
-    <a href="#how-does-openphysis-differ-from-other-vpo-software" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p><strong>OpenPhysis</strong> does not play back samples like GrandOrgue or Hauptwerk<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>. It is based on physical modeling.</p>
-<p><strong>OpenPhysis</strong>:</p>
-<ul>
-<li>does not use samples,</li>
-<li>models physical phenomena in the pipe and windchest,</li>
-<li>allows creation of organ stop timbres via an editor.</li>
+          <h2>Planned Project Structure<span class="hx-absolute -hx-mt-20" id="planned-project-structure"></span>
+    <a href="#planned-project-structure" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Currently, everything is in one repository. In the future, the project will be divided into modules:</p>
+<table>
+  <thead>
+      <tr>
+          <th>Repository (planned)</th>
+          <th>Description</th>
+      </tr>
+  </thead>
+  <tbody>
+      <tr>
+          <td><code>OpenPhysis</code></td>
+          <td>Main VPO application, interface, instrument configuration</td>
+      </tr>
+      <tr>
+          <td><code>fonus-core</code></td>
+          <td>DSP engine and spectral synthesis system</td>
+      </tr>
+      <tr>
+          <td><code>fonus-ml</code></td>
+          <td>Machine learning modules for predicting stop parameters</td>
+      </tr>
+      <tr>
+          <td><code>fonus-fdtd</code></td>
+          <td>Physical simulations (FDTD) and scaling data</td>
+      </tr>
+      <tr>
+          <td><code>physis-docs</code></td>
+          <td>Technical and research documentation of the project</td>
+      </tr>
+  </tbody>
+</table>
+<h2>Current Status (pre-alpha)<span class="hx-absolute -hx-mt-20" id="current-status-pre-alpha"></span>
+    <a href="#current-status-pre-alpha" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><ul>
+<li><input checked="" disabled="" type="checkbox"> Prototype of synthesis engine modeled on Viscount Physis (offline)</li>
+<li><input checked="" disabled="" type="checkbox"> Interactive harmonic component generator (Jupyter)</li>
+<li><input disabled="" type="checkbox"> Code refactoring</li>
+<li><input disabled="" type="checkbox"> Expansion of engine for real-time operation</li>
+<li><input disabled="" type="checkbox"> Integration with ML and FDTD systems</li>
 </ul>
-<p>The <em><strong>FONUS</strong></em> synthesis engine has built-in machine learning that facilitates the tuning of synthesis parameters. Interactions are nondeterministic and it is difficult to predict the influence of one parameter on others. Thanks to machine learning, it will be possible to create timbre using just a few parameters analogous to pipe scaling (mensuration).</p>
-<h2>What is physical modeling?<span class="hx-absolute -hx-mt-20" id="what-is-physical-modeling"></span>
-    <a href="#what-is-physical-modeling" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><p>Physical modeling refers to mathematical methods describing physical phenomena occurring, for example, in an organ pipe. There are many physical modeling methods. Many require high computational power and cannot run in real time. Viscount developed a simplified model that eliminates the drawbacks of physical modeling by waveguide synthesis. An accessible description of the algorithm was created by Dr. Colin Pykett <a href="https://www.colinpykett.org.uk/physical-modelling-viscount-organ-patent.htm" target="_blank" rel="noopener">Viscount Organs - some observations on physical modelling patent US7442869</a>.</p>
-<h2>Notes<span class="hx-absolute -hx-mt-20" id="notes"></span>
-    <a href="#notes" class="subheading-anchor" aria-label="Permalink for this section"></a></h2><div class="footnotes" role="doc-endnotes">
-<hr>
-<ol>
-<li id="fn:1">
-<p>Hauptwerk can influence samples. It has an implemented <em>wind model</em>: detuning, tremulant, and swell box attenuation.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
-</li>
-</ol>
-</div>
 
         </div>
+        <div class="hx-mt-16"></div>
+        
       </main>
     </article>
   </div>
@@ -327,7 +354,7 @@ What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maxim
         
         <li class="hx-flex hx-flex-col">
           <a
-            href="/"
+            href="/architecture/"
             class="hx-text-gray-800 dark:hx-text-gray-100 hover:hx-bg-primary-50 hover:hx-text-primary-600 hover:dark:hx-bg-primary-500/10 hover:dark:hx-text-primary-600 hx-relative hx-cursor-pointer hx-whitespace-nowrap hx-py-1.5 hx-transition-colors ltr:hx-pl-3 ltr:hx-pr-9 rtl:hx-pr-3 rtl:hx-pl-9"
           >English<span class="hx-absolute hx-inset-y-0 hx-flex hx-items-center ltr:hx-right-3 rtl:hx-left-3"><svg height=1em width=1em xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"><path stroke-linecap="round" stroke-linejoin="round" d="M5 13l4 4L19 7"/></svg></span></a>
         </li>
@@ -359,8 +386,8 @@ What is OpenPhysis? OpenPhysis is virtual pipe organ software designed for maxim
   </a></div></div>
       </div></footer>
     
-    <script defer src="/js/main.min.0942239592f0795dc7213dd1057fd229d7edc19c0ef1a285396eb292d9ca9842.js" integrity="sha256-CUIjlZLweV3HIT3RBX/SKdftwZwO8aKFOW6yktnKmEI="></script>
+    <script defer src="/js/main.js" integrity=""></script>
 <script defer src="/lib/flexsearch/flexsearch.bundle.min.0425860527cc9968f9f049421c7a56b39327d475e2e3a8f550416be3a9134327.js" integrity="sha256-BCWGBSfMmWj58ElCHHpWs5Mn1HXi46j1UEFr46kTQyc="></script>
-    <script defer src="/en.search.min.7918d81999396a56d9ff1b7a986d6474e66bd5acdbbe01e8bac129f5ef345a88.js" integrity="sha256-eRjYGZk5albZ/xt6mG1kdOZr1azbvgHousEp9e80Wog="></script>
+    <script defer src="/en.search.js" integrity=""></script>
   </body>
 </html>
